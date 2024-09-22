@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>97df7aec-9b4a-43e5-98eb-db1ce457d38d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Fighter.py</StartupFile>
+    <StartupFile>deal.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,8 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Fighter.py" />
-    <Compile Include="NewFile.py" />
+    <Compile Include="env.py" />
+    <Compile Include="deal.py" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|VisualStudio|newtorch" />

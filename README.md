@@ -1,21 +1,15 @@
-## 项目目标
-这个项目旨在利用pytorch开发一个黑神话的战斗的神经网络，通过识别画面进行跑图
+## Project Goals
+This project aims to develop a neural network for the combat in "Black Myth" using PyTorch, enabling map navigation through screen recognition.
 
-### 硬性要求
-1· 在0.1s内神经网络能够做出一轮应答
+### Hard Requirements
+1. The neural network must respond within 0.1 seconds.
+2. It should perform basic map navigation operations in a linear map.
+3. The AI can only use basic keyboard inputs; no combo moves are allowed.
+4. The AI must be able to defeat Guangzhi, the first boss.
 
-2· 能够在线性地图中完成跑图的基本操作
+## Expected Problem Solving
 
-3· AI只能使用基本键盘操作，不得封装连招等
-
-4· AI能够击败广智，即第一个boss。
-
-## 预期解决问题
-
-1· 搭建基本交互环境，即读取屏幕，程序输出转键盘等
-
-2· 使用预训练网络使得拥有跑图能力
-
-3· 进行图像分割与人物状态识别
-
-4· 基础战斗训练
+1. Establish a basic interaction environment, including screen reading and program output to keyboard inputs.
+2. Utilize a pre-trained network to enable map navigation capabilities.
+3. Perform image segmentation and character state recognition.
+4. Conduct basic combat training.

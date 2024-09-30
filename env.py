@@ -9,7 +9,7 @@ import pyautogui
 from PIL import Image
 import matplotlib.pyplot as plt
 
-# ¶¨Òå×ª»»º¯Êı£¬½«PILÍ¼Ïñ×ª»»Îª3*224*224µÄTensor
+# å®šä¹‰è½¬æ¢å‡½æ•°ï¼Œå°†PILå›¾åƒè½¬æ¢ä¸º3*224*224çš„Tensor
 def transform_image(img):
     transform = transforms.Compose([
         transforms.Resize(256),
@@ -19,11 +19,39 @@ def transform_image(img):
     ])
     return transform(img).unsqueeze(0)
 
-# ´ÓÆÁÄ»Êä³ö»ñÈ¡Í¼Æ¬
+# ä»å±å¹•è¾“å‡ºè·å–å›¾ç‰‡
 def get_img():
     return  pyautogui.screenshot()
 
-# ÏÔÊ¾Í¼Ïñ
+# æŒ‡å®šåŒºåŸŸçš„åƒç´ ç»Ÿè®¡
+def count_pixels_in_range(region, value_range):
+    # è·å–å±å¹•æˆªå›¾
+    screenshot = pyautogui.screenshot(region=region)
+    
+    # åˆ é™¤alphaé€šé“ï¼Œè½¬æ¢ä¸ºRGBæ ¼å¼
+    img_rgb = screenshot.convert('RGB')
+    
+    # è½¬æ¢ä¸ºTensorå³NumPyæ•°ç»„
+    img_array = torch.tensor(list(img_rgb.getdata()), dtype=torch.float32).view(img_rgb.size[1], img_rgb.size[0], 3)
+
+    # å®šä¹‰è¦ç»Ÿè®¡çš„èŒƒå›´
+    lower_bound = torch.tensor(value_range[0], dtype=torch.float32)
+    upper_bound = torch.tensor(value_range[1], dtype=torch.float32)
+
+    # è®¡ç®—åœ¨èŒƒå›´å†…çš„åƒç´ 
+    mask = (img_array >= lower_bound) & (img_array <= upper_bound)
+    count = mask.all(dim=-1).sum().item()  # åœ¨ä¸‰ä¸ªé€šé“éƒ½æ»¡è¶³æ¡ä»¶æ—¶è®¡æ•°
+
+    return count
+
+#  ===========example========== #
+## å®šä¹‰æˆªå›¾åŒºåŸŸ (left, top, width, height)
+#region = (100, 100, 300, 300)  # ç¤ºä¾‹åŒºåŸŸ
+## å®šä¹‰è¦ç»Ÿè®¡çš„åƒç´ å€¼èŒƒå›´ (lower_bound, upper_bound)
+#value_range = ((50, 50, 50), (200, 200, 200))  # ç¤ºä¾‹èŒƒå›´ï¼Œæ³¨æ„è¿™é‡Œä¸å†æœ‰alphaé€šé“
+
+
+# æ˜¾ç¤ºå›¾åƒ
 def show_img(img):
     plt.imshow(transforms.ToPILImage()(img))
     plt.show()
@@ -39,14 +67,14 @@ class envs():
         self.observation_space = (224, 224, 3)
         self.action_dim = len(self.action_space)
         self.flash_time = flash_time
-        ##ÉÏ¸öÊ±¿ÌÑªÁ¿¡¢À¶Á¿¡¢ÌåÁ¦£º
+        ##ä¸Šä¸ªæ—¶åˆ»è¡€é‡ã€è“é‡ã€ä½“åŠ›ï¼š
         self.health=1000
         self.mana=100
         self.stamina=100
 
-        self.line_number=[] ##ĞĞºÅ£¬´ı²â¶¨
-        self.fcolour=[] ##ÑÕÉ«£¬´ı²â¶¨
-        self.findready=[] ##ÊÇ·ñ¿ÉÒÔµã»÷·¨Êõ£¬´ı²â¶¨
+        self.line_number=[] ##è¡Œå·ï¼Œå¾…æµ‹å®š
+        self.fcolour=[] ##é¢œè‰²ï¼Œå¾…æµ‹å®š
+        self.findready=[] ##æ˜¯å¦å¯ä»¥ç‚¹å‡»æ³•æœ¯ï¼Œå¾…æµ‹å®š
 
     def _simulate_key_press(self, key):
         if key == 'ctrl':
@@ -76,52 +104,53 @@ class envs():
     from PIL import Image
 
 def find_color_length(image_path, y, target_color):
-    # ´ò¿ªÍ¼Æ¬
+    # æ‰“å¼€å›¾ç‰‡
     img = Image.open(image_path)
     
-    # »ñÈ¡Í¼Æ¬³ß´ç
+    # è·å–å›¾ç‰‡å°ºå¯¸
     width, height = img.size
     
-    # ³õÊ¼»¯Á¬ĞøÑÕÉ«³¤¶È
+    # åˆå§‹åŒ–è¿ç»­é¢œè‰²é•¿åº¦
     length = 0
     max_length = 0
     
-    # ±éÀúÖ¸¶¨ĞĞµÄËùÓĞÏñËØ
+    # éå†æŒ‡å®šè¡Œçš„æ‰€æœ‰åƒç´ 
     for x in range(width):
-        # »ñÈ¡ÏñËØÑÕÉ«
+        # è·å–åƒç´ é¢œè‰²
         pixel_color = img.getpixel((x, y))
         
-        # Èç¹ûÑÕÉ«Æ¥Åä£¬ÔòÔö¼Ó³¤¶È
+        # å¦‚æœé¢œè‰²åŒ¹é…ï¼Œåˆ™å¢åŠ é•¿åº¦
         if pixel_color == target_color:
             length += 1
             max_length = max(max_length, length)
         else:
-            # Èç¹ûÑÕÉ«²»Æ¥Åä£¬ÔòÖØÖÃ³¤¶È
+            # å¦‚æœé¢œè‰²ä¸åŒ¹é…ï¼Œåˆ™é‡ç½®é•¿åº¦
             length = 0
     
     return max_length
 
-    ##Í¨¹ı·ÖÎötensor¶ÔÓ¦Í¼ÏñÖ¸¶¨ÇøÓòÏñËØ»ñµÃµ±Ç°ÈÎÎñ×´Ì¬
+    ##é€šè¿‡åˆ†ætensorå¯¹åº”å›¾åƒæŒ‡å®šåŒºåŸŸåƒç´ è·å¾—å½“å‰ä»»åŠ¡çŠ¶æ€
     def get_reward(self,img):
-        ##Ê¶±ğÍ¼Ïñ½øĞĞ×´Ì¬Ê¶±ğ£¬´ıÍêÉÆ
+        pass ##è¯†åˆ«å›¾åƒè¿›è¡ŒçŠ¶æ€è¯†åˆ«ï¼Œå¾…å®Œå–„
         return reward
+    
     def step(self,actions_tensor):
         if not isinstance(actions_tensor,torch.Tensor):
             raise TypeError('actions_tensor must be a torch.Tensor')
 
         _,top_indices = torch.topk(actions_tensor, 2)
-        # ½«Ë÷Òı×ª»»Îª¶ÔÓ¦µÄ°´¼ü
+        # å°†ç´¢å¼•è½¬æ¢ä¸ºå¯¹åº”çš„æŒ‰é”®
         keys = [self.action_space[index.item()] for index in top_indices]
 
-        # ´´½¨Ïß³ÌÁĞ±í
+        # åˆ›å»ºçº¿ç¨‹åˆ—è¡¨
         threads = []
 
-        # Æô¶¯Ïß³Ì
+        # å¯åŠ¨çº¿ç¨‹
         for key in keys:
             thread = threading.Thread(target=self._simulate_key_press, args=(key,))
             threads.append(thread)
             thread.start()
 
-        # µÈ´ıËùÓĞÏß³ÌÍê³É
+        # ç­‰å¾…æ‰€æœ‰çº¿ç¨‹å®Œæˆ
         for thread in threads:
             thread.join()

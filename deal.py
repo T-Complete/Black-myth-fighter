@@ -1,7 +1,7 @@
 import numpy as np
 import pyautogui
-import matplotlib.pyplot as plt
-import torch
+from PIL import Image
+from env import *
 from torchvision.transforms import ToTensor
 
 class Agent:
@@ -13,3 +13,8 @@ class Agent:
     def runit():
         pass   #TODO more
 
+
+img=Image.open("E:\ANNprogram\data\BM\sample.png") #path/to/your/image
+plt.imshow(img)
+plt.axis('off')
+plt.show()

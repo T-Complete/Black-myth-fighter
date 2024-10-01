@@ -71,10 +71,16 @@ class envs():
         self.health=1000
         self.mana=100
         self.stamina=100
+        self.region = [(150,1360,556,1461),
+                       (150,1360,556,1461),
+                       (150,1360,556,1461),#状态条范围
+            ]
+        self.colours = [
+            ((200,200,200)(256,256,256)),#白色，血量
+            ((60,70,160),(70,80,180)),#蓝量
+            ((185,150,95),(195,160,105))#体力
+            ]
 
-        self.line_number=[] ##行号，待测定
-        self.fcolour=[] ##颜色，待测定
-        self.findready=[] ##是否可以点击法术，待测定
 
     def _simulate_key_press(self, key):
         if key == 'ctrl':
@@ -131,7 +137,11 @@ def find_color_length(image_path, y, target_color):
 
     ##通过分析tensor对应图像指定区域像素获得当前任务状态
     def get_reward(self,img):
-        pass ##识别图像进行状态识别，待完善
+        threads = []
+        for i in range[0,3]:
+            thread = threading.Thread(target=count_pixels_in_range, args=())
+            threads.append(thread)
+            thread.start()
         return reward
     
     def step(self,actions_tensor):

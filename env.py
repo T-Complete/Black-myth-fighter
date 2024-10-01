@@ -3,6 +3,7 @@ import time
 import threading
 import torch.nn.functional as F
 import torchvision
+import concurrent.futures
 import torchvision.transforms as transforms
 import torchvision.models as models
 import pyautogui
@@ -62,24 +63,29 @@ class envs():
     'a', 'd', 'w', 's', 'q', 'e', 'r', 'z', 'x', 'c', 'v', ' ',
     'ctrl', 'ml', 'mm', 'mr',
     'move_up', 'move_down', 'move_left', 'move_right',
-    'none', 'none', 'none'
+    'none', 'none'
     ]
         self.observation_space = (224, 224, 3)
         self.action_dim = len(self.action_space)
         self.flash_time = flash_time
-        ##上个时刻血量、蓝量、体力：
-        self.health=1000
-        self.mana=100
-        self.stamina=100
+        self.reward_weight = torch.tensor([5,3,0.2])
         self.region = [(150,1360,556,1461),
                        (150,1360,556,1461),
                        (150,1360,556,1461),#状态条范围
+                       ()#boss血条，待测
+                       ()#小怪血条，待测
             ]
         self.colours = [
             ((200,200,200)(256,256,256)),#白色，血量
             ((60,70,160),(70,80,180)),#蓝量
             ((185,150,95),(195,160,105))#体力
+            ((200,200,200)(256,256,256)),#boss,白色
+            ((),())#小怪，待测定
             ]
+        with concurrent.futures.ThreadPoolExecutor() as executor:##创建线程池
+            futures=[executor.submit(count_pixels_in_range, self.region[i],self.colours[i]) for i in range[0,3]]##提交任务获取返回值
+            results = [future.result() for future in futures]
+            last_list = torch.tensor(results)
 
 
     def _simulate_key_press(self, key):
@@ -108,6 +114,43 @@ class envs():
             time.sleep(self.flash_time)
             pyautogui.keyUp(key)
     from PIL import Image
+    
+    def obs():
+        img=get_img()
+        img=transform_image(img)
+        return img
+    ##通过分析tensor对应图像指定区域像素获得当前任务状态
+    def reward(self,img):
+        threads = []
+        reward = -10;
+        with concurrent.futures.ThreadPoolExecutor() as executor:##创建线程池
+            futures=[executor.submit(count_pixels_in_range, self.region[i],self.colours[i]) for i in range[0,3]]##提交任务获取返回值
+            results = [future.result() for future in futures]
+            tensor_result = torch.tensor(results)
+            reward = torch.sum((tensor_result-self.last_list)*self.reward_weight) ##计算奖励
+            last_list = tensor_result
+        return reward
+    
+    def step(self,actions_tensor):
+        if not isinstance(actions_tensor,torch.Tensor):
+            raise TypeError('actions_tensor must be a torch.Tensor')
+
+        _,top_indices = torch.topk(actions_tensor, 2)
+        # 将索引转换为对应的按键
+        keys = [self.action_space[index.item()] for index in top_indices]
+
+        # 创建线程列表
+        threads = []
+
+        # 启动线程
+        for key in keys:
+            thread = threading.Thread(target=self._simulate_key_press, args=(key,))
+            threads.append(thread)
+            thread.start()
+
+        # 等待所有线程完成
+        for thread in threads:
+            thread.join()
 
 def find_color_length(image_path, y, target_color):
     # 打开图片
@@ -134,33 +177,3 @@ def find_color_length(image_path, y, target_color):
             length = 0
     
     return max_length
-
-    ##通过分析tensor对应图像指定区域像素获得当前任务状态
-    def get_reward(self,img):
-        threads = []
-        for i in range[0,3]:
-            thread = threading.Thread(target=count_pixels_in_range, args=())
-            threads.append(thread)
-            thread.start()
-        return reward
-    
-    def step(self,actions_tensor):
-        if not isinstance(actions_tensor,torch.Tensor):
-            raise TypeError('actions_tensor must be a torch.Tensor')
-
-        _,top_indices = torch.topk(actions_tensor, 2)
-        # 将索引转换为对应的按键
-        keys = [self.action_space[index.item()] for index in top_indices]
-
-        # 创建线程列表
-        threads = []
-
-        # 启动线程
-        for key in keys:
-            thread = threading.Thread(target=self._simulate_key_press, args=(key,))
-            threads.append(thread)
-            thread.start()
-
-        # 等待所有线程完成
-        for thread in threads:
-            thread.join()

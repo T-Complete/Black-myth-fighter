@@ -1,21 +1,6 @@
-## 项目目标
-这个项目旨在利用pytorch开发一个黑神话的战斗的神经网络，通过识别画面进行跑图
+This brunch is used to set up your python environment.I recommand you use Anaconda.if you have conda, use yml to create a new environment.
+You can use this:conda env create -f environment.yml -n yourenvname
 
-### 硬性要求
-1· 在0.1s内神经网络能够做出一轮应答
+If you haven't got the conda,you can use pip to install them:pip install -r requrements.txt
 
-2· 能够在线性地图中完成跑图的基本操作
-
-3· AI只能使用基本键盘操作，不得封装连招等
-
-4· AI能够击败广智，即第一个boss。
-
-## 预期解决问题
-
-1· 搭建基本交互环境，即读取屏幕，程序输出转键盘等
-
-2· 使用预训练网络使得拥有跑图能力
-
-3· 进行图像分割与人物状态识别
-
-4· 基础战斗训练
+Both two are right. 

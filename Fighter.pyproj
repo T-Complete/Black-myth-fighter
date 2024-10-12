@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>Fighter</Name>
     <RootNamespace>Fighter</RootNamespace>
-    <InterpreterId>Global|VisualStudio|newtorch</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.12</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,6 +26,8 @@
     <Compile Include="deal.py" />
   </ItemGroup>
   <ItemGroup>
+    <InterpreterReference Include="CondaEnv|CondaEnv|black-myth-fighter" />
+    <InterpreterReference Include="Global|PythonCore|3.12" />
     <InterpreterReference Include="Global|VisualStudio|newtorch" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

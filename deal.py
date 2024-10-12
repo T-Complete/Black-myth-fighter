@@ -1,4 +1,4 @@
-from os import wait
+import os
 import numpy as np
 import pyautogui
 from PIL import Image

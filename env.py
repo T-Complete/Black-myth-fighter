@@ -80,7 +80,7 @@ class envs():
             ((60,70,160),(70,80,180)),#蓝量
             ((185,150,95),(195,160,105))#体力
             ((200,200,200)(256,256,256)),#boss,白色
-            ((),())#小怪，待测定
+            ((89,31,31),(166,64,63))#小怪
             ]
         with concurrent.futures.ThreadPoolExecutor() as executor:##创建线程池
             futures=[executor.submit(count_pixels_in_range, self.region[i],self.colours[i]) for i in range[0,3]]##提交任务获取返回值

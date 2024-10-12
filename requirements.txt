@@ -1,27 +1,27 @@
 absl-py==2.1.0
 anyio==4.6.0
 argon2-cffi==23.1.0
-argon2-cffi-bindings @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/argon2-cffi-bindings_1699549801117/work
+argon2-cffi-bindings==21.2.0
 arrow==1.3.0
 asttokens==2.4.1
 astunparse==1.6.3
-async-lru @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/async-lru_1701796859357/work
+async-lru==2.0.4
 attrs==24.2.0
 babel==2.16.0
-beautifulsoup4 @ file:///C:/b/abs_d5wytg_p0w/croot/beautifulsoup4-split_1718029833749/work
+beautifulsoup4==4.12.3
 bleach==6.1.0
 Brotli==1.1.0
-certifi @ file:///C:/b/abs_1fw_exq1si/croot/certifi_1725551736618/work/certifi
+certifi==2024.8.30
 cffi==1.17.1
-charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
+charset-normalizer==3.4.0
 cloudpickle==3.0.0
-colorama @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/colorama_1699472650914/work
+colorama==0.4.6
 comm==0.2.2
 contourpy==1.3.0
 cycler==0.12.1
-debugpy==1.8.6
-decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
-defusedxml @ file:///tmp/build/80754af9/defusedxml_1615228127516/work
+debugpy==1.8.7
+decorator==5.1.1
+defusedxml==0.7.1
 executing==2.1.0
 fastjsonschema==2.20.0
 filelock==3.16.1
@@ -32,67 +32,67 @@ fsspec==2024.9.0
 gast==0.6.0
 google-pasta==0.2.0
 grpcio==1.66.2
-h11 @ file:///C:/b/abs_1czwoyexjf/croot/h11_1706652332846/work
+h11==0.14.0
 h5py==3.12.1
-httpcore==1.0.5
+httpcore==1.0.6
 httpx==0.27.2
 idna==3.10
 ipykernel==6.29.5
-ipython @ file:///C:/b/abs_53it5seiim/croot/ipython_1726064251844/work
+ipython==8.28.0
 isoduration==20.11.0
-jedi @ file:///C:/b/abs_1b8kmj7rrm/croot/jedi_1721058359741/work
-Jinja2 @ file:///C:/b/abs_92fccttino/croot/jinja2_1716993447201/work
+jedi==0.19.1
+Jinja2==3.1.4
 joblib==1.4.2
 json5==0.9.25
 jsonpointer==3.0.0
 jsonschema==4.23.0
-jsonschema-specifications==2023.12.1
-jupyter-events @ file:///C:/b/abs_c2m9s5b5m5/croot/jupyter_events_1718738115254/work
+jsonschema-specifications==2024.10.1
+jupyter-events==0.10.0
 jupyter-lsp==2.2.5
 jupyter_client==8.6.3
-jupyter_core @ file:///C:/b/abs_beftpbuevw/croot/jupyter_core_1718818307097/work
+jupyter_core==5.7.2
 jupyter_server==2.14.2
 jupyter_server_terminals==0.5.3
-jupyterlab @ file:///C:/b/abs_88qjk9lo2r/croot/jupyterlab_1725895228333/work
+jupyterlab==4.2.5
 jupyterlab_pygments==0.3.0
-jupyterlab_server @ file:///C:/b/abs_fdi5r_tpjc/croot/jupyterlab_server_1725865372811/work
-keras==3.5.0
+jupyterlab_server==2.27.3
+keras==3.6.0
 kiwisolver==1.4.7
 libclang==18.1.1
 Markdown==3.7
 markdown-it-py==3.0.0
-MarkupSafe==2.1.5
+MarkupSafe==3.0.1
 matplotlib==3.9.2
 matplotlib-inline==0.1.7
 mdurl==0.1.2
 mistune==3.0.2
-ml_dtypes==0.5.0
+ml-dtypes==0.4.1
 MouseInfo==0.1.3
 mpmath==1.3.0
 namex==0.0.8
 nbclient==0.10.0
 nbconvert==7.16.4
 nbformat==5.10.4
-nest-asyncio @ file:///C:/b/abs_65d6lblmoi/croot/nest-asyncio_1708532721305/work
-networkx==3.3
-notebook @ file:///C:/b/abs_03qbdiu7cg/croot/notebook_1725954777879/work
+nest-asyncio==1.6.0
+networkx==3.4
+notebook==7.2.2
 notebook_shim==0.2.4
 Nuitka==2.4.8
-numpy==2.1.1
-onnx==1.16.2
+numpy==1.26.4
+onnx==1.17.0
 opt_einsum==3.4.0
-optree==0.12.1
+optree==0.13.0
 ordered-set==4.1.0
 orjson==3.10.7
 overrides==7.7.0
-packaging @ file:///C:/b/abs_c3vlh0z4jw/croot/packaging_1720101866539/work
+packaging==24.1
 pandocfilters==1.5.1
 parso==0.8.4
 pillow==10.4.0
 platformdirs==4.3.6
 prometheus_client==0.21.0
 prompt_toolkit==3.0.48
-protobuf==5.28.2
+protobuf==4.25.5
 psutil==6.0.0
 pure_eval==0.2.3
 PyAutoGUI==0.9.54
@@ -104,58 +104,58 @@ pyparsing==3.1.4
 pyperclip==1.9.0
 PyRect==0.2.0
 PyScreeze==1.0.1
-PySocks @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/pysocks_1699473336188/work
-python-dateutil @ file:///C:/b/abs_3au_koqnbs/croot/python-dateutil_1716495777160/work
-python-json-logger @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/python-json-logger_1699543626759/work
+PySocks==1.7.1
+python-dateutil==2.9.0.post0
+python-json-logger==2.0.7
 pytweening==1.2.0
 pytz==2024.2
-pywin32==306
+pywin32==307
 pywinpty==2.0.13
 PyYAML==6.0.2
 pyzmq==26.2.0
 referencing==0.35.1
-requests @ file:///C:/b/abs_9frifg92q2/croot/requests_1721410901096/work
-rfc3339-validator @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/rfc3339-validator_1699543924991/work
-rfc3986-validator @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/rfc3986-validator_1699543955651/work
-rich==13.8.1
+requests==2.32.3
+rfc3339-validator==0.1.4
+rfc3986-validator==0.1.1
+rich==13.9.2
 rpds-py==0.20.0
 scikit-learn==1.5.2
 scipy==1.14.1
 Send2Trash==1.8.3
 setuptools==75.1.0
-six @ file:///tmp/build/80754af9/six_1644875935023/work
+six==1.16.0
 sniffio==1.3.1
 soupsieve==2.6
 spyder-kernels==3.0.0
 stack-data==0.6.3
 sympy==1.13.3
-tensorboard==2.18.0
+tensorboard==2.17.1
 tensorboard-data-server==0.7.2
 tensordict==0.5.0
 tensorflow==2.17.0
 tensorflow-intel==2.17.0
-termcolor==2.4.0
+termcolor==2.5.0
 terminado==0.18.1
 threadpoolctl==3.5.0
 tinycss2==1.3.0
-torch @ file:///C:/Users/%E5%A7%9C%E5%93%B2%E6%B5%A9/Downloads/torch-2.4.1%2Bcu124-cp312-cp312-win_amd64.whl#sha256=d077728576768acbf0e4ce1b87164d1f3f75c17a9b1676c09e84c32ceeac1c06
+torch==2.4.1
 torchaudio==2.4.1
 torchrl==0.5.0
 torchtext==0.18.0
 torchvision==0.19.1
-tornado @ file:///C:/b/abs_7bua0304mj/croot/tornado_1718740122405/work
+tornado==6.4.1
 tqdm==4.66.5
-traitlets @ file:///C:/b/abs_bfsnoxl4pq/croot/traitlets_1718227069245/work
-types-python-dateutil==2.9.0.20240906
+traitlets==5.14.3
+types-python-dateutil==2.9.0.20241003
 typing_extensions==4.12.2
 uri-template==1.3.0
 urllib3==2.2.3
 wcwidth==0.2.13
 webcolors==24.8.0
-webencodings @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/webencodings_1699497069416/work
-websocket-client @ file:///C:/b/abs_5dmnxxoci9/croot/websocket-client_1715878351319/work
+webencodings==0.5.1
+websocket-client==1.8.0
 Werkzeug==3.0.4
 wheel==0.44.0
-win-inet-pton @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/win_inet_pton_1699472992992/work
+win-inet-pton==1.1.0
 wrapt==1.16.0
 zstandard==0.23.0

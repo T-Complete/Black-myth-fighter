@@ -45,3 +45,4 @@ def playing_access(env, Agent):
         wait_time = max(0, wait_time - elapsed_time)
         if wait_time != 0:
             time.sleep(wait_time)
+

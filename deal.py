@@ -1,4 +1,4 @@
-import os
+ï»¿import os
 import numpy as np
 import pyautogui
 from PIL import Image
@@ -15,29 +15,29 @@ class Agent:
         pass # TODO more
 
 def playing_access(env, Agent):
-    experience_buffer = []  # ÓÃÓÚ´æ´¢¾­Ñé
+    experience_buffer = []  # ç”¨äºå­˜å‚¨ç»éªŒ
     while not stop_event.is_set():
         start_time = time.time()
         
-        # »ñÈ¡µ±Ç°×´Ì¬
+        # è·å–å½“å‰çŠ¶æ€
         state = env.obs()
-        action = Agent.forward(state)  # Ñ¡Ôñ¶¯×÷
-        env.step(action)  # Ö´ĞĞ¶¯×÷
+        action = Agent.forward(state)  # é€‰æ‹©åŠ¨ä½œ
+        env.step(action)  # æ‰§è¡ŒåŠ¨ä½œ
         
-        # »ñÈ¡½±ÀøºÍÏÂÒ»¸ö×´Ì¬
+        # è·å–å¥–åŠ±å’Œä¸‹ä¸€ä¸ªçŠ¶æ€
         rewards = env.rewards()
-        next_state = env.obs()  # »ñÈ¡ÏÂÒ»¸ö×´Ì¬
-        done = env.is_done()  # ¼ì²éÊÇ·ñ½áÊø
+        next_state = env.obs()  # è·å–ä¸‹ä¸€ä¸ªçŠ¶æ€
+        done = env.is_done()  # æ£€æŸ¥æ˜¯å¦ç»“æŸ
         
-        # ´æ´¢¾­Ñé
+        # å­˜å‚¨ç»éªŒ
         experience_buffer.append((state, action, rewards, next_state, done))
         
-        # ÑµÁ·Ä£ĞÍ
-        if len(experience_buffer) >= Agent.batch_size:  # Èç¹û¾­Ñé»º³åÇø´ïµ½Ò»¶¨´óĞ¡
-            # ´Ó¾­ÑéÖĞ²ÉÑù
+        # è®­ç»ƒæ¨¡å‹
+        if len(experience_buffer) >= Agent.batch_size:  # å¦‚æœç»éªŒç¼“å†²åŒºè¾¾åˆ°ä¸€å®šå¤§å°
+            # ä»ç»éªŒä¸­é‡‡æ ·
             batch = np.random.choice(len(experience_buffer), Agent.batch_size, replace=False)
             experience = [experience_buffer[i] for i in batch]
-            Agent.train(experience)  # ÑµÁ·´úÀí
+            Agent.train(experience)  # è®­ç»ƒä»£ç†
 
         print(rewards)
 
